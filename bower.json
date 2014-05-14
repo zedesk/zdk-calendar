@@ -1,0 +1,28 @@
+{
+  "name": "zdk-calendar",
+  "version": "0.0.1",
+  "authors": [
+    "Fabrice <fabrice.lecoz@zedesk.net>"
+  ],
+  "description": "A Small calendar component",
+  "keywords": [
+    "calendar",
+    "polymer",
+    "web-component",
+    "component"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zedesk/zdk-calendar",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "momentjs": "~2.6.0",
+    "polymer": "Polymer/polymer#0.2.4",
+    "platform": "polymer/platform#~0.2.4"
+  }
+}

@@ -1,0 +1,121 @@
+<link rel="import" href="../polymer/polymer.html">
+<script src="../momentjs/min/moment-with-langs.min.js"></script>
+
+<polymer-element name="zdk-calendar" attributes="date start stop i18n">
+	<template>
+		<link rel="stylesheet" href="zdk-calendar.css">
+		<div id="calendar">
+			<div class="row head">
+				<div on-click="{{prevMonth}}"><img src="left.png"></div>
+				<div on-click="{{today}}"><img src="point.png"></div>
+				<div on-click="{{nextMonth}}"><img src="right.png"></div>
+				<div id="date" style="flex:7"></div>
+			</div>
+		</div>
+	</template>
+	<script>
+		Polymer('zdk-calendar', {
+			day: null,
+			i18n: null,
+			ready: function() {
+				this.i18n = this.i18n?this.i18n:navigator.language || navigator.userLanguage;
+				this.day = (typeof this.date === "string")?moment(this.date):moment();
+				this.draw();
+			},
+			draw: function() {
+				moment.lang(this.i18n);
+				this.$.date.innerHTML = this.day.format("MMM YYYY");
+
+				var wdivs = this.$.calendar.querySelectorAll("div.w");
+				wdivs = [].slice.call(wdivs);
+
+				var that =this;
+				wdivs.forEach(function(wdiv) {
+					that.$.calendar.removeChild(wdiv);
+				});
+
+				// first day of the calendar ( premier jour de la semaine du 1er )
+				var fday = moment(this.day).date(1).weekday(0);
+
+				var weekdays = document.createElement("div");
+				var div;
+				weekdays.classList.add("row","w");
+				for(var i=0;i<7;i++) {
+					div = document.createElement("div");
+					div.innerHTML = moment().weekday(i).format("dd");
+					weekdays.appendChild(div);
+				}
+				this.$.calendar.appendChild(weekdays);
+
+				var today = moment();
+				var weekdiv;
+				for(var w=0;w<6;w++) {
+					weekdiv = document.createElement("div");
+					weekdiv.classList.add("row","w");
+					for(var d=0;d<7;d++) {
+						div = document.createElement("div");
+						div.classList.add("day");
+						div.innerHTML = fday.date();
+
+						if(fday.year()==today.year() && fday.month()==today.month() && fday.date()==today.date()  ) {
+							div.classList.add("today");
+						}
+						if(fday.month()!=this.day.month()) div.classList.add("d1");
+						if([0,6].indexOf(fday.day()) !== -1) div.classList.add("we");
+
+						div.setAttribute("data-date",fday.format("YYYY-MM-DD"));
+						div.addEventListener("click",function(){ that.dateClick(this.getAttribute("data-date")) },false);
+						weekdiv.appendChild(div);
+						fday.add('d',1);
+					}
+					this.$.calendar.appendChild(weekdiv);
+				}
+			},
+			i18nChanged: function(oldValue, newValue) {
+				this.i18n = newValue?newValue:navigator.language || navigator.userLanguage;
+				this.draw();
+			},
+			dateChanged: function(oldValue, newValue) {
+				moment.lang(this.i18n);
+				switch(typeof newValue) {
+					case "number":
+					case "object":
+						this.day = moment(newValue);
+						break;
+					case "string":
+						this.day = moment(newValue,"L");
+						if(this.day.isValid() === false) {
+							this.day = moment(newValue);
+						}
+						break;
+					default:
+						this.day = moment();
+				}
+				if(this.day.isValid() === false ) {
+					this.day = moment();
+				}
+				this.draw();
+			},
+			prevMonth: function(event,detail,sender) {
+				this.day.add("M",-1);
+				this.draw();
+				this.fire('dateChange', this.day.valueOf());
+			},
+			nextMonth: function(event,detail,sender) {
+				this.day.add("M",1);
+				this.draw();
+				this.fire('dateChange', this.day.valueOf());
+			},
+			today: function(event,detail,sender) {
+				// if(this.day.format("YYYY-MM") === moment().format("YYYY-MM")) return;
+				this.day = moment();
+				this.draw();
+				this.fire('dateChange', this.day.valueOf());
+			},
+			dateClick: function(day) {
+				moment.lang(this.i18n);
+				this.fire('select', { day:moment(day).format("L"), time:moment(day).valueOf()});
+			}
+		});
+	</script>
+</polymer-element>
