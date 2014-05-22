@@ -5,7 +5,7 @@
 	<title>calendar test page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="/css/font.css" rel="stylesheet">
-	<script src="/bower_components/platform/platform.js"></script>
+	<script src="../platform/platform.js"></script>
 	<link rel="import" href="zdk-calendar.htm">
 	
 	<style>
@@ -20,6 +20,12 @@
 			min-width:100px;
 			text-align:center;
 		}
+        pre {
+			margin: 5px 15px;
+			background: aliceblue;
+			padding: 0px 20px;
+			overflow: auto;
+		}
 		zdk-calendar {
 			background:white;
 		}
@@ -29,29 +35,26 @@
 			font-size: 12px;
 			border:1px solid black;
 		}
-		zdk-calendar.small /deep/ div.head, 
+    </style>
+    <style shim-shadowdom>
+		zdk-calendar.small::shadow div.head, 
 		zdk-calendar.small div.head {
 			background:#d61a7f;
 			font-weight: bold;
 			color: #ffffff;
 		}
-		zdk-calendar.small /deep/ div.d1 {
+		zdk-calendar.small::shadow div.d1 {
 			background:aliceblue;
+            color:#ccc;
 		}
-		zdk-calendar.small /deep/ div.d1:hover {
+		zdk-calendar.small::shadow div.d1:hover {
 			background:#B2DFDB;
 		}
-		zdk-calendar.small /deep/ div.we {
+		zdk-calendar.small::shadow div.we {
 			background:LemonChiffon;
 		}
-		zdk-calendar.small /deep/ div.we:hover {
+		zdk-calendar.small::shadow div.we:hover {
 			background:Khaki;
-		}
-		pre {
-			margin: 5px 15px;
-			background: aliceblue;
-			padding: 0px 20px;
-			overflow: auto;
 		}
 	</style>
 </head>
@@ -212,5 +215,30 @@ document.querySelector("#cal5").addEventListener('dateChange', function(e) {
 	document.querySelector("#cal4").setAttribute("date", date);
 }, false);
 	</code></pre>
+    <h2>Styling your calendar</h2>
+    <p>Styling your calendar can be done using `shim-shadowdom` style declaration, for example to customize the mini-calendars above :</p>
+    <pre><code>
+    &lt;style shim-shadowdom&gt;
+		zdk-calendar.small::shadow div.head, 
+		zdk-calendar.small div.head {
+			background:#d61a7f;
+			font-weight: bold;
+			color: #ffffff;
+		}
+		zdk-calendar.small::shadow div.d1 {
+			background:aliceblue;
+            color:#ccc;
+		}
+		zdk-calendar.small::shadow div.d1:hover {
+			background:#B2DFDB;
+		}
+		zdk-calendar.small::shadow div.we {
+			background:LemonChiffon;
+		}
+		zdk-calendar.small::shadow div.we:hover {
+			background:Khaki;
+		}
+	&lt;/style&gt;
+    </code></pre>
 </body>
 </html>
