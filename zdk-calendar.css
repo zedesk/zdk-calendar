@@ -5,35 +5,55 @@
 	font-family:Verdana, Helvetica;
 	font-size:14px;
 }
+
 * { box-sizing: border-box;}
+
 div#calendar {
-	height: 100%;
-	display: flex;
+    display:-webkit-flex;
+    -webkit-flex-direction: column;
+    display: flex;
 	flex-direction: column;
+	height: 100%;
 }
+
 div#calendar div {
+    display:flex; 
 	flex:1; 
+    display:-webkit-flex;
+    -webkit-flex:1;
 	border-collapse:collapse;
-	display:flex; 
 }
+
 div.head img {
 	width:100%;
 }
+
+div.head div#date {
+    flex:7;
+    -webkit-flex:7;
+}
+
 div.row div { 
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
 }
+
 div.day:hover {
 	background:#ccc;
 }
+
 div.today {
 	font-weight:bold;
 	color:tomato;
 }
+
 div.d1 {
 	background: antiquewhite;
 }
+
 div.head: {
 	background: var(head-bg);
 }
