@@ -13,7 +13,10 @@ div#calendar {
     -webkit-flex-direction: column;
     display: flex;
 	flex-direction: column;
+	display: -ms-flexbox;
+	-ms-flex-direction: column;
 	height: 100%;
+	overflow:hidden;
 }
 
 div#calendar div {
@@ -21,6 +24,8 @@ div#calendar div {
 	flex:1; 
     display:-webkit-flex;
     -webkit-flex:1;
+	display: -ms-flexbox;
+	-ms-flex:1;
 	border-collapse:collapse;
 }
 
@@ -31,6 +36,7 @@ div.head img {
 div.head div#date {
     flex:7;
     -webkit-flex:7;
+	-ms-flex:7;
 }
 
 div.row div { 
@@ -39,6 +45,8 @@ div.row div {
 	text-align: center;
     -webkit-justify-content: center;
     -webkit-align-items: center;
+	-ms-flex-align: center;
+	-ms-justify-content: center;
 }
 
 div.day:hover {
