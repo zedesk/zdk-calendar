@@ -97,22 +97,26 @@
 				this.draw();
 			},
 			prevMonth: function(event,detail,sender) {
+				event.preventDefault();
 				this.day.add("M",-1);
 				this.draw();
 				this.fire('dateChange', this.day.valueOf());
 			},
 			nextMonth: function(event,detail,sender) {
+				event.preventDefault();
 				this.day.add("M",1);
 				this.draw();
 				this.fire('dateChange', this.day.valueOf());
 			},
 			today: function(event,detail,sender) {
+				event.preventDefault();
 				// if(this.day.format("YYYY-MM") === moment().format("YYYY-MM")) return;
 				this.day = moment();
 				this.draw();
 				this.fire('dateChange', this.day.valueOf());
 			},
 			dateClick: function(day) {
+				event.preventDefault();
 				moment.lang(this.i18n);
 				this.fire('select', { day:moment(day).format("L"), time:moment(day).valueOf()});
 			}
