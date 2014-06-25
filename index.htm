@@ -26,6 +26,11 @@
 			padding: 0px 20px;
 			overflow: auto;
 		}
+    </style>
+
+</head>
+<body>
+	<style>
 		zdk-calendar {
 			background:white;
 		}
@@ -35,8 +40,8 @@
 			font-size: 12px;
 			border:1px solid black;
 		}
-    </style>
-    <style shim-shadowdom>
+	</style>
+	<style shim-shadowdom>
 		zdk-calendar.small::shadow div.head, 
 		zdk-calendar.small div.head {
 			background:#d61a7f;
@@ -57,8 +62,6 @@
 			background:Khaki;
 		}
 	</style>
-</head>
-<body>
 	<h1>Calendar component</h1>
 	<h2>Default calendar</h2>
 	<p>To use the calendar compondent add to the head of your file :</p>
@@ -193,12 +196,14 @@ cal3.date = "2014-02-10";
 		document.querySelector("#cal4").addEventListener('dateChange', function(e) {
 			var date = new Date(e.detail);
 			date.setMonth(date.getMonth()+1);
-			document.querySelector("#cal5").setAttribute("date", date);
+			// document.querySelector("#cal5").setAttribute("date", date.getTime());
+			document.querySelector("#cal5").date = parseInt(date.getTime(),0);
 		}, false);
 		document.querySelector("#cal5").addEventListener('dateChange', function(e) {
 			var date = new Date(e.detail);
 			date.setMonth(date.getMonth()-1);
-			document.querySelector("#cal4").setAttribute("date", date);
+			//document.querySelector("#cal4").setAttribute("date", date.getTime());
+			document.querySelector("#cal4").date = parseInt(date.getTime(),0);
 		}, false);
 	</script>
 	</div>
