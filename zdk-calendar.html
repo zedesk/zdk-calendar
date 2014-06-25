@@ -6,9 +6,9 @@
 		<link rel="stylesheet" href="zdk-calendar.css">
 		<div id="calendar">
 			<div class="row head">
-				<div on-click="{{prevMonth}}"><img src="left.png"></div>
-				<div on-click="{{today}}"><img src="point.png"></div>
-				<div on-click="{{nextMonth}}"><img src="right.png"></div>
+				<div id="prevMonth" ><img src="left.png"></div>
+				<div id="today"     on-click="{{today}}"><img src="point.png"></div>
+				<div id="nextMonth" on-click="{{nextMonth}}"><img src="right.png"></div>
 				<div id="date"></div>
 			</div>
 		</div>
@@ -25,11 +25,14 @@
 			draw: function() {
 				moment.lang(this.i18n);
 				this.$.date.innerHTML = this.day.format("MMM YYYY");
-
+				
+				var that =this;
+				this.$.prevMonth.addEventListener("click", function() { that.prevMonth(); }, false);
+				
 				var wdivs = this.$.calendar.querySelectorAll("div.w");
 				wdivs = [].slice.call(wdivs);
 
-				var that =this;
+				
 				wdivs.forEach(function(wdiv) {
 					that.$.calendar.removeChild(wdiv);
 				});
@@ -71,6 +74,38 @@
 					this.$.calendar.appendChild(weekdiv);
 				}
 			},
+			update: function() {
+				moment.lang(this.i18n);
+				this.$.date.innerHTML = this.day.format("MMM YYYY");
+
+				var wdivs = this.$.calendar.querySelectorAll("div.w");
+				wdivs = [].slice.call(wdivs);
+				
+				// first day of the calendar ( premier jour de la semaine du 1er )
+				var fday = moment(this.day).date(1).weekday(0);
+				
+				var that = this;
+				var today = moment();
+				wdivs.forEach( function(wdiv,i) {
+					if (i===0) return;
+					var days = wdiv.querySelectorAll(".day");
+					days = [].slice.call(days,0);
+					
+					days.forEach( function(day) {
+						day.classList.remove("today");
+						day.classList.remove("d1");
+						
+						day.innerHTML = fday.date();
+						
+						if(fday.year()==today.year() && fday.month()==today.month() && fday.date()==today.date()  ) {
+							day.classList.add("today");
+						}
+						if(fday.month()!=that.day.month()) day.classList.add("d1");
+						day.setAttribute("data-date",fday.format("YYYY-MM-DD"));
+						fday.add('d',1);
+					});
+				});
+			},
 			i18nChanged: function(oldValue, newValue) {
 				this.i18n = newValue?newValue:navigator.language || navigator.userLanguage;
 				this.draw();
@@ -96,23 +131,23 @@
 				}
 				this.draw();
 			},
-			prevMonth: function(event,detail,sender) {
-				event.preventDefault();
+			prevMonth: function() {
+				// event.preventDefault();
 				this.day.add("M",-1);
-				this.draw();
+				this.update();
 				this.fire('dateChange', this.day.valueOf());
 			},
 			nextMonth: function(event,detail,sender) {
 				event.preventDefault();
 				this.day.add("M",1);
-				this.draw();
+				this.update();
 				this.fire('dateChange', this.day.valueOf());
 			},
 			today: function(event,detail,sender) {
 				event.preventDefault();
 				// if(this.day.format("YYYY-MM") === moment().format("YYYY-MM")) return;
 				this.day = moment();
-				this.draw();
+				this.update();
 				this.fire('dateChange', this.day.valueOf());
 			},
 			dateClick: function(day) {
