@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<script src="../momentjs/min/moment-with-langs.min.js"></script>
+<script src="../momentjs/min/moment-with-locales.min.js"></script>
 
 <polymer-element name="zdk-calendar" attributes="date start stop i18n">
 	<template>
@@ -25,14 +25,14 @@
 			draw: function() {
 				moment.lang(this.i18n);
 				this.$.date.innerHTML = this.day.format("MMM YYYY");
-				
+
 				var that =this;
 				this.$.prevMonth.addEventListener("click", function() { that.prevMonth(); }, false);
-				
+
 				var wdivs = this.$.calendar.querySelectorAll("div.w");
 				wdivs = [].slice.call(wdivs);
 
-				
+
 				wdivs.forEach(function(wdiv) {
 					that.$.calendar.removeChild(wdiv);
 				});
@@ -80,23 +80,23 @@
 
 				var wdivs = this.$.calendar.querySelectorAll("div.w");
 				wdivs = [].slice.call(wdivs);
-				
+
 				// first day of the calendar ( premier jour de la semaine du 1er )
 				var fday = moment(this.day).date(1).weekday(0);
-				
+
 				var that = this;
 				var today = moment();
 				wdivs.forEach( function(wdiv,i) {
 					if (i===0) return;
 					var days = wdiv.querySelectorAll(".day");
 					days = [].slice.call(days,0);
-					
+
 					days.forEach( function(day) {
 						day.classList.remove("today");
 						day.classList.remove("d1");
-						
+
 						day.innerHTML = fday.date();
-						
+
 						if(fday.year()==today.year() && fday.month()==today.month() && fday.date()==today.date()  ) {
 							day.classList.add("today");
 						}
