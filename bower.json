@@ -21,8 +21,7 @@
 		"tests"
 	],
 	"dependencies": {
-		"momentjs": "2.8.1",
-		"platform": "Polymer/platform#0.3.4",
-		"polymer": "Polymer/polymer#0.3.5"
+		"momentjs": "2.8.3",
+		"polymer": "Polymer/polymer#0.4.2"
 	}
 }
