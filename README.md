@@ -22,6 +22,8 @@ the component expose the following attributes :
 
   - i18n : The language setting for the calendar
   - date : The date of the calendar ( by default today )
+  - start : sets the first selectable date 
+  - stop : sets the last selectable date
 
 the component emits one event : "select" when clicking on a date. The event come with the following object :
 
