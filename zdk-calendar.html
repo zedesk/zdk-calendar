@@ -17,13 +17,17 @@
 		Polymer('zdk-calendar', {
 			day: null,
 			i18n: null,
+			start:null,
+			stop:null,
 			ready: function() {
 				this.i18n = this.i18n?this.i18n:navigator.language || navigator.userLanguage;
 				this.day = (typeof this.date === "string")?moment(this.date):moment();
+				if(this.start) { this.start = moment(this.start).format("X"); }
+				if(this.stop) { this.stop = moment(this.stop).format("X"); }
 				this.draw();
 			},
 			draw: function() {
-				moment.lang(this.i18n);
+				moment.locale(this.i18n);
 				this.$.date.innerHTML = this.day.format("MMM YYYY");
 
 				var that =this;
@@ -38,7 +42,7 @@
 				});
 
 				// first day of the calendar ( premier jour de la semaine du 1er )
-				var fday = moment(this.day).date(1).weekday(0);
+				var fday = moment(this.day).date(1).weekday(0).hours(0).minutes(0).seconds(0);
 
 				var weekdays = document.createElement("div");
 				var div;
@@ -67,7 +71,15 @@
 						if([0,6].indexOf(fday.day()) !== -1) div.classList.add("we");
 
 						div.setAttribute("data-date",fday.format("YYYY-MM-DD"));
+						if( this.start && fday.format("X") < this.start ) {
+							div.classList.add("disable");
+						}
+						if( this.stop && fday.format("X") > this.stop ) {
+							div.classList.add("disable");
+						}
+						
 						div.addEventListener("click",function(){ that.dateClick(this.getAttribute("data-date")) },false);
+						
 						weekdiv.appendChild(div);
 						fday.add('d',1);
 					}
@@ -82,7 +94,7 @@
 				wdivs = [].slice.call(wdivs);
 
 				// first day of the calendar ( premier jour de la semaine du 1er )
-				var fday = moment(this.day).date(1).weekday(0);
+				var fday = moment(this.day).date(1).weekday(0).hours(0).minutes(0).seconds(0);
 
 				var that = this;
 				var today = moment();
@@ -94,13 +106,22 @@
 					days.forEach( function(day) {
 						day.classList.remove("today");
 						day.classList.remove("d1");
-
+						day.classList.remove("disable");
+						
 						day.innerHTML = fday.date();
 
 						if(fday.year()==today.year() && fday.month()==today.month() && fday.date()==today.date()  ) {
 							day.classList.add("today");
 						}
 						if(fday.month()!=that.day.month()) day.classList.add("d1");
+						
+						if( that.start && fday.format("X") < that.start ) {
+							day.classList.add("disable");
+						}
+						if( that.stop && fday.format("X") > that.stop ) {
+							day.classList.add("disable");
+						}
+						
 						day.setAttribute("data-date",fday.format("YYYY-MM-DD"));
 						fday.add('d',1);
 					});
@@ -109,6 +130,24 @@
 			i18nChanged: function(oldValue, newValue) {
 				this.i18n = newValue?newValue:navigator.language || navigator.userLanguage;
 				this.draw();
+			},
+			startChanged: function(oldValue, newValue) {
+				if( this.start === newValue) { return; }
+				if(newValue) { 
+					this.start = moment(newValue).format("X"); 
+				} else {
+					this.start = null;
+				}
+				this.update();
+			},
+			stopChanged: function(oldValue, newValue) {
+				if( this.stop === newValue) { return; }
+				if(newValue) { 
+					this.stop = moment(newValue).format("X"); 
+				} else {
+					this.stop = null;
+				}
+				this.update();
 			},
 			dateChanged: function(oldValue, newValue) {
 				moment.lang(this.i18n);
@@ -153,7 +192,10 @@
 			dateClick: function(day) {
 				event.preventDefault();
 				moment.lang(this.i18n);
-				this.fire('select', { day:moment(day).format("L"), time:moment(day).valueOf()});
+				var selectedDay = moment(day).format("X")
+				if( !( this.start && selectedDay < this.start ) && !( this.stop && selectedDay > this.stop )) {
+					this.fire('select', { day:moment(day).format("L"), time:moment(day).valueOf()});
+				}
 			}
 		});
 	</script>
