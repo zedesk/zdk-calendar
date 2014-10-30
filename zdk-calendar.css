@@ -68,3 +68,7 @@ div.d1 {
 div.head: {
 	background: var(head-bg);
 }
+
+div.disable {
+	background: lightgray;
+}
