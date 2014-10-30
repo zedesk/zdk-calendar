@@ -1,6 +1,6 @@
 {
   "name": "zdk-calendar",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "authors": [
     "Fabrice <fabrice.lecoz@zedesk.net>"
   ],
@@ -21,8 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "momentjs": "~2.6.0",
-    "polymer": "Polymer/polymer#0.2.4",
-    "platform": "polymer/platform#~0.2.4"
+    "momentjs": "~2.7.0",
+    "polymer": "Polymer/polymer#0.3.3"
   }
 }
