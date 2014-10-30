@@ -9,23 +9,24 @@
 * { box-sizing: border-box;}
 
 div#calendar {
-    display:-webkit-flex;
-    -webkit-flex-direction: column;
-    display: flex;
-	flex-direction: column;
 	display: -ms-flexbox;
 	-ms-flex-direction: column;
+	display:-webkit-flex;
+	-webkit-flex-direction: column;
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 	overflow:hidden;
 }
 
 div#calendar div {
-    display:flex; 
-	flex:1; 
-    display:-webkit-flex;
-    -webkit-flex:1;
+	display:-webkit-flex;
+	-webkit-flex:1;
 	display: -ms-flexbox;
 	-ms-flex:1;
+	text-align:center;
+	display:flex;
+	flex:1;
 	border-collapse:collapse;
 }
 
@@ -34,19 +35,21 @@ div.head img {
 }
 
 div.head div#date {
-    flex:7;
-    -webkit-flex:7;
+	flex:7;
+	-webkit-flex:7;
 	-ms-flex:7;
 }
 
-div.row div { 
+div.row div {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-    -webkit-justify-content: center;
-    -webkit-align-items: center;
+	-webkit-justify-content: center;
+	-webkit-align-items: center;
 	-ms-flex-align: center;
-	-ms-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	align-items: center;
 }
 
 div.day:hover {

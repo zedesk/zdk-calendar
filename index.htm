@@ -7,10 +7,12 @@
 	<link href="/css/font.css" rel="stylesheet">
 	<script src="../platform/platform.js"></script>
 	<link rel="import" href="zdk-calendar.html">
-	
+
 	<style>
 		body {
-			font-size:16px;font-family:"Oxygen",Helvetica,Arial,sans-serif;font-weight:normal;line-height:24px
+			font-size:16px;font-family:"Oxygen",Helvetica,Arial,sans-serif;
+			font-weight:normal;
+			line-height:24px
 		}
 		div.date {
 			display: inline-block;
@@ -20,13 +22,13 @@
 			min-width:100px;
 			text-align:center;
 		}
-        pre {
+		pre {
 			margin: 5px 15px;
 			background: aliceblue;
 			padding: 0px 20px;
 			overflow: auto;
 		}
-    </style>
+	</style>
 
 </head>
 <body>
@@ -42,7 +44,7 @@
 		}
 	</style>
 	<style shim-shadowdom>
-		zdk-calendar.small::shadow div.head, 
+		zdk-calendar.small::shadow div.head,
 		zdk-calendar.small div.head {
 			background:#d61a7f;
 			font-weight: bold;
@@ -50,7 +52,7 @@
 		}
 		zdk-calendar.small::shadow div.d1 {
 			background:aliceblue;
-            color:#ccc;
+			color:#ccc;
 		}
 		zdk-calendar.small::shadow div.d1:hover {
 			background:#B2DFDB;
@@ -220,11 +222,11 @@ document.querySelector("#cal5").addEventListener('dateChange', function(e) {
 	document.querySelector("#cal4").setAttribute("date", date);
 }, false);
 	</code></pre>
-    <h2>Styling your calendar</h2>
-    <p>Styling your calendar can be done using `shim-shadowdom` style declaration, for example to customize the mini-calendars above :</p>
-    <pre><code>
-    &lt;style shim-shadowdom&gt;
-		zdk-calendar.small::shadow div.head, 
+	<h2>Styling your calendar</h2>
+	<p>Styling your calendar can be done using `shim-shadowdom` style declaration, for example to customize the mini-calendars above :</p>
+	<pre><code>
+	&lt;style shim-shadowdom&gt;
+		zdk-calendar.small::shadow div.head,
 		zdk-calendar.small div.head {
 			background:#d61a7f;
 			font-weight: bold;
@@ -232,7 +234,7 @@ document.querySelector("#cal5").addEventListener('dateChange', function(e) {
 		}
 		zdk-calendar.small::shadow div.d1 {
 			background:aliceblue;
-            color:#ccc;
+			color:#ccc;
 		}
 		zdk-calendar.small::shadow div.d1:hover {
 			background:#B2DFDB;
@@ -244,6 +246,6 @@ document.querySelector("#cal5").addEventListener('dateChange', function(e) {
 			background:Khaki;
 		}
 	&lt;/style&gt;
-    </code></pre>
+	</code></pre>
 </body>
 </html>
