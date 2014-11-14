@@ -77,9 +77,9 @@
 						if( this.stop && fday.format("X") > this.stop ) {
 							div.classList.add("disable");
 						}
-						
-						div.addEventListener("click",function(){ that.dateClick(this.getAttribute("data-date")) },false);
-						
+
+						div.addEventListener("click",function(evt){ that.dateClick(evt, this.getAttribute("data-date")) },false);
+
 						weekdiv.appendChild(div);
 						fday.add('d',1);
 					}
@@ -107,21 +107,21 @@
 						day.classList.remove("today");
 						day.classList.remove("d1");
 						day.classList.remove("disable");
-						
+
 						day.innerHTML = fday.date();
 
 						if(fday.year()==today.year() && fday.month()==today.month() && fday.date()==today.date()  ) {
 							day.classList.add("today");
 						}
 						if(fday.month()!=that.day.month()) day.classList.add("d1");
-						
+
 						if( that.start && fday.format("X") < that.start ) {
 							day.classList.add("disable");
 						}
 						if( that.stop && fday.format("X") > that.stop ) {
 							day.classList.add("disable");
 						}
-						
+
 						day.setAttribute("data-date",fday.format("YYYY-MM-DD"));
 						fday.add('d',1);
 					});
@@ -133,8 +133,8 @@
 			},
 			startChanged: function(oldValue, newValue) {
 				if( this.start === newValue) { return; }
-				if(newValue) { 
-					this.start = moment(newValue).format("X"); 
+				if(newValue) {
+					this.start = moment(newValue).format("X");
 				} else {
 					this.start = null;
 				}
@@ -142,8 +142,8 @@
 			},
 			stopChanged: function(oldValue, newValue) {
 				if( this.stop === newValue) { return; }
-				if(newValue) { 
-					this.stop = moment(newValue).format("X"); 
+				if(newValue) {
+					this.stop = moment(newValue).format("X");
 				} else {
 					this.stop = null;
 				}
@@ -189,7 +189,7 @@
 				this.update();
 				this.fire('dateChange', this.day.valueOf());
 			},
-			dateClick: function(day) {
+			dateClick: function(event, day) {
 				event.preventDefault();
 				moment.lang(this.i18n);
 				var selectedDay = moment(day).format("X")
