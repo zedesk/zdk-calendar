@@ -1,6 +1,14 @@
 
 # Changelog
 
+__v0.2.0__
+
+  - update polymer to 0.5.x
+
+__v0.1.1__
+
+  - FIX dateclick event for firefox
+  
 __v0.1.0__
 
   - update polymer to 0.4.2
