@@ -28,6 +28,8 @@ div#calendar div {
 	display:flex;
 	flex:1;
 	border-collapse:collapse;
+core-icon {
+	color:DarkGray;
 }
 
 div.head img {

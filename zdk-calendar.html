@@ -1,4 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-icon/core-icon.html">
+<link rel="import" href="custom-icons.html">
 <script src="../momentjs/min/moment-with-locales.min.js"></script>
 
 <polymer-element name="zdk-calendar" attributes="date start stop i18n">
@@ -6,9 +8,9 @@
 		<link rel="stylesheet" href="zdk-calendar.css">
 		<div id="calendar">
 			<div class="row head">
-				<div id="prevMonth" ><img src="left.png"></div>
-				<div id="today"     on-click="{{today}}"><img src="point.png"></div>
-				<div id="nextMonth" on-click="{{nextMonth}}"><img src="right.png"></div>
+				<div id="prevMonth" ><core-icon icon="custom-icons:prev" size="30"></core-icon></div>
+				<div id="today"     on-click="{{today}}"><core-icon icon="custom-icons:today" ></core-icon></div>
+				<div id="nextMonth" on-click="{{nextMonth}}"><core-icon icon="custom-icons:next" ></core-icon></div>
 				<div id="date"></div>
 			</div>
 		</div>
