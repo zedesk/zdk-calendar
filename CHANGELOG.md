@@ -1,7 +1,7 @@
 
 # Changelog
 
-__v0.2.1-pre__
+__v0.2.1__
 
   - uses core-iconset-svg rather that images
   - FIX moment deprecated method
