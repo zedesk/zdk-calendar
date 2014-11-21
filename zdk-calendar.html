@@ -83,13 +83,13 @@
 						div.addEventListener("click",function(evt){ that.dateClick(evt, this.getAttribute("data-date")) },false);
 
 						weekdiv.appendChild(div);
-						fday.add('d',1);
+						fday.add(1,'d');
 					}
 					this.$.calendar.appendChild(weekdiv);
 				}
 			},
 			update: function() {
-				moment.lang(this.i18n);
+				moment.locale(this.i18n);
 				this.$.date.innerHTML = this.day.format("MMM YYYY");
 
 				var wdivs = this.$.calendar.querySelectorAll("div.w");
@@ -125,12 +125,12 @@
 						}
 
 						day.setAttribute("data-date",fday.format("YYYY-MM-DD"));
-						fday.add('d',1);
+						fday.add(1,'d');
 					});
 				});
 			},
 			i18nChanged: function(oldValue, newValue) {
-				this.i18n = newValue?newValue:navigator.language || navigator.userLanguage;
+				this.i18n = newValue?newValue:navigator.localeuage || navigator.userLanguage;
 				this.draw();
 			},
 			startChanged: function(oldValue, newValue) {
@@ -152,7 +152,7 @@
 				this.update();
 			},
 			dateChanged: function(oldValue, newValue) {
-				moment.lang(this.i18n);
+				moment.locale(this.i18n);
 				switch(typeof newValue) {
 					case "number":
 					case "object":
@@ -174,13 +174,13 @@
 			},
 			prevMonth: function() {
 				// event.preventDefault();
-				this.day.add("M",-1);
+				this.day.add(-1,'M');
 				this.update();
 				this.fire('dateChange', this.day.valueOf());
 			},
 			nextMonth: function(event,detail,sender) {
 				event.preventDefault();
-				this.day.add("M",1);
+				this.day.add(1,'M');
 				this.update();
 				this.fire('dateChange', this.day.valueOf());
 			},
@@ -193,7 +193,7 @@
 			},
 			dateClick: function(event, day) {
 				event.preventDefault();
-				moment.lang(this.i18n);
+				moment.locale(this.i18n);
 				var selectedDay = moment(day).format("X")
 				if( !( this.start && selectedDay < this.start ) && !( this.stop && selectedDay > this.stop )) {
 					this.fire('select', { day:moment(day).format("L"), time:moment(day).valueOf()});
