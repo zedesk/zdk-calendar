@@ -28,6 +28,12 @@ div#calendar div {
 	display:flex;
 	flex:1;
 	border-collapse:collapse;
+	-webkit-user-select:none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 core-icon {
 	color:DarkGray;
 }
