@@ -4,6 +4,7 @@
 	height:300px;
 	font-family:Verdana, Helvetica;
 	font-size:14px;
+	background:white;
 }
 
 * { box-sizing: border-box;}
@@ -79,4 +80,9 @@ div.head: {
 
 div.disable {
 	background: lightgray;
+}
+
+div.selected {
+	background: dodgerBlue;
+	font-weight:bold;
 }

@@ -1,0 +1,83 @@
+:host {
+    display:inline-block;
+    align-self: baseline;
+}
+.input {
+    display:-ms-flexbox;
+    display:-webkit-flex;
+    display:flex;
+}
+input {
+    height:30px;
+    padding:0px;
+    margin: 0px;
+    border:1px solid lightgray;
+    /* Pour iOS*/
+    -webkit-appearance: none;
+    -webkit-border-radius:0;
+    box-sizing: border-box;
+    font-size: 0.8em;
+    padding-left: 5px;
+    outline:none;
+}
+button {
+    width:30px;
+    height:30px;
+    padding: 0px;
+    margin: 0px;
+    border:2px;
+    background-color:lightgray;
+    outline: none;
+}
+.dropdown {
+    -webkit-animation: animation 1.2s;
+    -moz-animation: animation 1.2s;
+    animation: animation 1.2s
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes animation {
+    0% {opacity:0;}
+    100% {opacity:1:}
+}
+/* Firefox */
+@-moz-keyframes animation {
+    0% {opacity:0;}
+    100% {opacity:1:}
+}
+/* IE */
+@keyframes animation {
+    0% {opacity:0;}
+    100% {opacity:1:}
+}
+.collapse {
+    display:none;
+}
+#arrowup {
+    position:absolute;
+    margin-top: -14px;
+}
+#arrowup div {
+    position:absolute;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+}
+.outside {
+    border-bottom: 15px solid lightgray;
+    margin-top: 0px;
+}
+.inner {
+    border-bottom: 15px solid white;
+    margin-top: 1px;
+}
+zdk-calendar {
+    border: 1px solid lightgrey;
+    width:250px;
+    height:250px;
+}
+#divcalendar {
+    position:absolute;
+    margin-top:7px;
+    box-shadow: 2px 2px 20px lightgrey;
+}

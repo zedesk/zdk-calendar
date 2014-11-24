@@ -1,0 +1,74 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../zdk-calendar/zdk-calendar.html">
+
+<polymer-element name="zdk-input-date" attributes="currentDateAuto autoCollapse inputDisabled i18n" onclick="">
+    <template>
+        <link rel="stylesheet" href="zdk-input-date.css">
+        <div class="input">
+            <input id="dateinput"><button id="button"></button>
+        </div>
+        <div id="divcalendar" class="collapse">
+            <div id="arrowup">
+                <div class="outside"></div>
+                <div class="inner"></div>
+            </div>
+            <zdk-calendar id="calendar"></zdk-calendar>
+            </div>
+        <content></content>
+    </template>
+    <script>
+        Polymer('zdk-input-date', {
+            i18n: null,
+            currentDateAuto: false,
+            autoCollapse:false,
+            inputDisabled : false,
+            domReady: function() {
+                this.i18n = this.i18n?this.i18n:navigator.language || navigator.userLanguage;
+                console.log("i18n",this.i18n);
+                moment.locale(this.i18n);
+                this.$.calendar.i18n = this.i18n;
+                var pos = this.$.button.offsetLeft+15;
+                this.$.divcalendar.style.left = (pos - 125)+"px";
+                this.$.arrowup.style.left = (pos - 125)+"px"
+                var that=this;
+                if (this.autoCollapse === true) {
+                    this.toggleCollapse();
+                }
+                if (this.inputDisabled === true) {
+                    this.$.dateinput.setAttribute("disabled", "");
+                }
+                this.$.button.addEventListener("click", function(e) {
+                    that.toggleCollapse();
+                });
+                this.$.dateinput.addEventListener("click", function(e) {
+                    that.toggleCollapse();
+                });
+                if (this.currentDateAuto === true) {
+                    console.log("date ",this.$.calendar.day.format("L"), this.$.calendar.i18n );
+                    this.fillInput(this.$.calendar.day.format("L"));
+                }
+                this.$.calendar.addEventListener('select', function(e) {
+                    that.fillInput(e.detail.day);
+                });
+            },
+            toggleCollapse: function() {
+                if( this.$.dateinput.value ) {
+                    this.$.calendar.selected = this.$.dateinput.value;
+                }
+                var cad = this.$.divcalendar;
+                if(cad.getAttribute("class") == "collapse") {
+                    cad.setAttribute("class", "dropdown");
+                } else {
+                    cad.setAttribute("class", "collapse");
+                }
+            },
+            fillInput: function(date) {
+                this.$.dateinput.value = date;
+                this.toggleCollapse();
+            },
+            getValue: function() {
+                return this.$.dateinput.value;
+            }
+        });
+    </script>
+</polymer-element>

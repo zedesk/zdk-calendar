@@ -3,7 +3,7 @@
 <link rel="import" href="custom-icons.html">
 <script src="../momentjs/min/moment-with-locales.min.js"></script>
 
-<polymer-element name="zdk-calendar" attributes="date start stop i18n">
+<polymer-element name="zdk-calendar" attributes="date start stop i18n selected">
 	<template>
 		<link rel="stylesheet" href="zdk-calendar.css">
 		<div id="calendar">
@@ -21,8 +21,11 @@
 			i18n: null,
 			start:null,
 			stop:null,
+			selected:null,
+			select:null,
 			ready: function() {
 				this.i18n = this.i18n?this.i18n:navigator.language || navigator.userLanguage;
+				moment.locale(this.i18n)
 				this.day = (typeof this.date === "string")?moment(this.date):moment();
 				if(this.start) { this.start = moment(this.start).format("X"); }
 				if(this.stop) { this.stop = moment(this.stop).format("X"); }
@@ -80,6 +83,10 @@
 							div.classList.add("disable");
 						}
 
+						if( this.selected === fday.format("X")) {
+							div.classList.add("selected");
+						}
+
 						div.addEventListener("click",function(evt){ that.dateClick(evt, this.getAttribute("data-date")) },false);
 
 						weekdiv.appendChild(div);
@@ -122,6 +129,10 @@
 						}
 						if( that.stop && fday.format("X") > that.stop ) {
 							day.classList.add("disable");
+						}
+
+						if( that.select && that.select === fday.format("X")) {
+							day.classList.add("selected");
 						}
 
 						day.setAttribute("data-date",fday.format("YYYY-MM-DD"));
@@ -169,6 +180,24 @@
 				}
 				if(this.day.isValid() === false ) {
 					this.day = moment();
+				}
+				this.update();
+			},
+			selectedChanged: function( oldValue, newValue ) {
+				moment.locale(this.i18n);
+				if( oldValue === newValue) {
+					return;
+				}
+				var select = this.$.calendar.querySelector(".selected");
+				if( select ) {
+					select.classList.remove("selected");
+				}
+				if(newValue) {
+					this.select = moment(newValue,moment.localeData().longDateFormat("L")).format("X");
+					if(isNaN(this.select)) { this.select = null; }
+				} else {
+					this.select = null;
+					this.selected = null;
 				}
 				this.update();
 			},
