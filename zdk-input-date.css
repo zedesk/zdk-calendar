@@ -1,6 +1,7 @@
 :host {
     display:inline-block;
-    align-self: baseline;
+	position: relative;
+    /* align-self: baseline; */
 }
 .input {
     display:-ms-flexbox;
