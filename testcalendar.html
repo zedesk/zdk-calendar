@@ -6,10 +6,44 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <script src="../webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="zdk-input-date.html">
+	<script src="form2js.js"></script>
+    <link rel="import" href="element.html">
     <style>
+	body {
+		font-family: Verdana, Arial;
+		font-size:14px;
+	}
+	form {
+		border:1px solid darkgray;
+		padding:10px;
+	}
+	form button {
+		height:30px;
+		background:dodgerblue;
+		border:none;
+		font-family:inherit;
+		font-size:inherit;
+		padding:0px 10px;
+		color:white;
+	}
     </style>
 </head>
-<body>
-<label>Date : </label><zdk-input-date autoCollapse="true" currentDateAuto="true" inputDisabled="true" style="width:200px"></zdk-input-date>
+<body unresolved>
+
+<form onsubmit="checkform(); return false;">
+	<label style="min-width:150px; display:inline-block">Date : </label><zdk-input-date name="date1" value="2014-12-18"></zdk-input-date> ( local format )<br/>
+	<label>Date2 : </label><input type="date" name="date2" value="2014-12-18"></input><br/>
+	<label>Date : </label><zdk-input-date name="date3" i18n="en"></zdk-input-date> ( english format )
+	<hr/>
+	<div style="text-align:right;padding-right:20px">
+		<button>Test</button>
+	</div>
+</form>
+<pre><code id="result"></code></pre>
+<script>
+function checkform() {
+	var form = document.forms[0];
+	document.getElementById("result").innerHTML = JSON.stringify(form2js(form),null,4);
+}
+</script>
 </body>
