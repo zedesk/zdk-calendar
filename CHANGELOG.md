@@ -1,6 +1,14 @@
 
 # Changelog
 
+__v0.2.3__
+
+  - enhance zdk-input-date
+
+__v0.2.2__
+
+  - adds a zdk-input-date component
+
 __v0.2.1__
 
   - uses core-iconset-svg rather that images
