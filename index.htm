@@ -7,6 +7,7 @@
 	<link href="/css/font.css" rel="stylesheet">
 	<script src="../webcomponentsjs/webcomponents.min.js"></script>
 	<link rel="import" href="zdk-calendar.html">
+	<link rel="import" href="zdk-input-date.html">
 
 	<style>
 		body {
@@ -259,5 +260,15 @@ document.querySelector("#cal5").addEventListener('dateChange', function(e) {
 	</code></pre>
 	<h2>input date</h2>
 	<pre><code>&lt;zdk-input-date id="input"&gt;&lt;/zdk-input-date&gt;</code></pre>
+	<h3>example</h3>
+		<zdk-input-date id="input"></zdk-input-date> <button onclick="clearInput()">clear</button>
+	<br/>
+	<script>
+		var input = document.querySelector("#input");
+		input.addEventListener("change", function() { alert("date has changed"); }, false);
+		function clearInput() {
+			input.clear();
+		}
+	</script>
 </body>
 </html>
