@@ -38,7 +38,7 @@
                 if (this.inputDisabled === true) {
                     this.$.dateinput.setAttribute("disabled", "");
                 } else {
-                    this.$.dateinput.addEventListener("keypress", function(evt) { 
+                    this.$.dateinput.addEventListener("keypress", function(evt) {
                         if( evt.keyCode === 13 ) {
                             that.value = that.$.dateinput.value;
                             that.$.dateinput.blur();
@@ -84,8 +84,8 @@
                     this.value = null;
                 }
                 var cad = this.$.divcalendar;
-                if( this.value ) { 
-                    this.$.calendar.date = this.value; 
+                if( this.value ) {
+                    this.$.calendar.date = this.value;
                 } else {
                     this.$.calendar.date = null;
                 }
@@ -111,6 +111,10 @@
                     this.value = null;
                     this.fillInput("");
                 }
+            },
+            clear: function() {
+                this.value = null;
+                this.fillInput("");
             }
         });
     </script>
