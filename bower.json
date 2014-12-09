@@ -1,29 +1,29 @@
 {
-  "name": "zdk-calendar",
-  "version": "0.2.3",
-  "authors": [
-    "Fabrice <fabrice.lecoz@zedesk.net>"
-  ],
-  "description": "A Small calendar component",
-  "keywords": [
-    "calendar",
-    "polymer",
-    "web-components",
-    "component"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/zedesk/zdk-calendar",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "momentjs": "~2.8.3",
-    "polymer": "Polymer/polymer#~0.5.1",
-    "core-icon":"Polymer/core-icon#~0.5.1",
-    "core-iconset-svg": "Polymer/core-iconset-svg#~0.5.1"
-  }
+	"name": "zdk-calendar",
+	"version": "0.2.4",
+	"authors": [
+		"Fabrice <fabrice.lecoz@zedesk.net>"
+	],
+	"description": "A Small calendar component",
+	"keywords": [
+		"calendar",
+		"polymer",
+		"web-components",
+		"component"
+	],
+	"license": "MIT",
+	"homepage": "https://github.com/zedesk/zdk-calendar",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"momentjs": "~2.8.3",
+		"polymer": "Polymer/polymer#~0.5.1",
+		"core-icon":"Polymer/core-icon#~0.5.1",
+		"core-iconset-svg": "Polymer/core-iconset-svg#~0.5.1"
+	}
 }
