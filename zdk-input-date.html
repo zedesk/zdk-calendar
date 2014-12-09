@@ -1,11 +1,12 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../zdk-calendar/zdk-calendar.html">
+<link rel="import" href="../core-icons/core-icons.html">
 
 <polymer-element name="zdk-input-date" attributes="currentDateAuto autoCollapse inputDisabled i18n value name" onclick="">
     <template>
         <link rel="stylesheet" href="zdk-input-date.css">
         <div class="input">
-            <input id="dateinput"><button id="button"></button>
+            <input id="dateinput"><button id="button"><core-icon icon="today"></core-icon></button>
         </div>
         <div id="divcalendar" class="collapse">
             <div id="arrowup">
