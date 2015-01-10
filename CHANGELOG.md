@@ -1,9 +1,15 @@
 
 # Changelog
 
+__v0.2.6__
+
+  - fix the position of the calendar associated to a zdk-input-date when displayed at the right of the window
+  - fix the button size for firefox
+  
 __v0.2.3__
 
   - enhance zdk-input-date
+  - add a modified version of form2js to read value from the zdk-input-date object
 
 __v0.2.2__
 

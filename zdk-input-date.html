@@ -29,8 +29,13 @@
 				moment.locale(this.i18n);
 				this.$.calendar.i18n = this.i18n;
 				var pos = this.$.button.offsetLeft+15;
-				this.$.divcalendar.style.left = (pos - 125)+"px";
-				this.$.arrowup.style.left = (pos - 125)+"px"
+				if( window.innerWidth < pos+125) {
+					this.$.divcalendar.style.right = 10 + "px";
+				} else {
+					this.$.divcalendar.style.left = (pos - 125) + "px";
+				}
+				// this.$.arrowup.style.left = (pos - 125)+"px"
+				this.$.arrowup.style.left = "105px";
 				var that=this;
 				this.$.dateinput.placeholder = moment.localeData().longDateFormat("L");
 				if (this.autoCollapse === false) {
