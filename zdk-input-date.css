@@ -23,6 +23,7 @@ input {
 }
 button {
     width:30px;
+    min-width:30px;
     height:30px;
     padding: 0px;
     margin: 0px;
