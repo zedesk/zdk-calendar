@@ -1,6 +1,10 @@
 
 # Changelog
 
+__v0.2.7__
+
+  - fix the value on blur
+
 __v0.2.6__
 
   - fix the position of the calendar associated to a zdk-input-date when displayed at the right of the window

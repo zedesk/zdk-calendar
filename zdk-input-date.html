@@ -61,8 +61,18 @@
 					that.toggleCollapse();
 				});
 				this.$.dateinput.addEventListener("blur", function() {
+					if( that.$.divcalendar.classList.contains("dropdown") ) {
+						that.toggleCollapse();
+					}
 					if( that.$.dateinput.value ) {
-						that.$.calendar.selected = that.$.dateinput.value;
+						var tmp = moment(this.value,"YYYY-MM-DD");
+						if( tmp.isValid() ) {
+							that.$.calendar.selected = that.$.dateinput.value;
+						} else {
+							that.$.dateinput.value = null;
+							that.value = null;
+							that.$.calendar.selected = null;
+						}
 					} else {
 						that.value = null;
 						that.$.calendar.selected = null;
