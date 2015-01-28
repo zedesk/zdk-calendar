@@ -60,7 +60,7 @@
 				this.$.dateinput.addEventListener("click", function(e) {
 					that.toggleCollapse();
 				});
-				this.$.dateinput.addEventListener("blur", function() {
+				this.$.dateinput.addEventListener("change", function() {
 					if( that.$.divcalendar.classList.contains("dropdown") ) {
 						that.toggleCollapse();
 					}
