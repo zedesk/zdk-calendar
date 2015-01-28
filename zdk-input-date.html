@@ -65,9 +65,10 @@
 						that.toggleCollapse();
 					}
 					if( that.$.dateinput.value ) {
-						var tmp = moment(this.value,"YYYY-MM-DD");
+						var tmp = moment(this.value,moment.localeData()._longDateFormat["L"]);
 						if( tmp.isValid() ) {
 							that.$.calendar.selected = that.$.dateinput.value;
+							that.value = tmp.format("YYYY-MM-DD");
 						} else {
 							that.$.dateinput.value = null;
 							that.value = null;
