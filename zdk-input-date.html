@@ -60,14 +60,15 @@
 				this.$.dateinput.addEventListener("click", function(e) {
 					that.toggleCollapse();
 				});
-				this.$.dateinput.addEventListener("blur", function() {
+				this.$.dateinput.addEventListener("change", function() {
 					if( that.$.divcalendar.classList.contains("dropdown") ) {
 						that.toggleCollapse();
 					}
 					if( that.$.dateinput.value ) {
-						var tmp = moment(this.value,"YYYY-MM-DD");
+						var tmp = moment(this.value,moment.localeData()._longDateFormat["L"]);
 						if( tmp.isValid() ) {
 							that.$.calendar.selected = that.$.dateinput.value;
+							that.value = tmp.format("YYYY-MM-DD");
 						} else {
 							that.$.dateinput.value = null;
 							that.value = null;
