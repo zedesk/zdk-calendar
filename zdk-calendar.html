@@ -8,24 +8,24 @@
 		<link rel="stylesheet" href="zdk-calendar.css">
 		<div id="calendar">
 			<div class="row head">
-				<div id="prevMonth" ><core-icon icon="custom-icons:prev" size="30"></core-icon></div>
-				<div id="today"     on-click="{{today}}"><core-icon icon="custom-icons:today" ></core-icon></div>
-				<div id="nextMonth" on-click="{{nextMonth}}"><core-icon icon="custom-icons:next" ></core-icon></div>
+				<div id="prevMonth" on-click="{{prevMonth}}"><core-icon icon="zdkCalendar-icons:prev" size="30"></core-icon></div>
+				<div id="today"     on-click="{{today}}"><core-icon icon="zdkCalendar-icons:today" ></core-icon></div>
+				<div id="nextMonth" on-click="{{nextMonth}}"><core-icon icon="zdkCalendar-icons:next" ></core-icon></div>
 				<div id="date"></div>
 			</div>
 		</div>
 	</template>
 	<script>
 		Polymer('zdk-calendar', {
-			day: null,
+			day: moment(),
 			i18n: null,
 			start:null,
 			stop:null,
 			selected:null,
 			select:null,
-			ready: function() {
+			domReady: function() {
 				this.i18n = this.i18n?this.i18n:navigator.language || navigator.userLanguage;
-				moment.locale(this.i18n)
+				moment.locale(this.i18n);
 				this.day = (typeof this.date === "string")?moment(this.date):moment();
 				if(this.start) { this.start = moment(this.start).format("X"); }
 				if(this.stop) { this.stop = moment(this.stop).format("X"); }
@@ -36,7 +36,7 @@
 				this.$.date.innerHTML = this.day.format("MMM YYYY");
 
 				var that =this;
-				this.$.prevMonth.addEventListener("click", function() { that.prevMonth(); }, false);
+				// this.$.prevMonth.addEventListener("click", function() { that.prevMonth(); }, false);
 
 				var wdivs = this.$.calendar.querySelectorAll("div.w");
 				wdivs = [].slice.call(wdivs);
@@ -142,7 +142,7 @@
 				});
 			},
 			i18nChanged: function(oldValue, newValue) {
-				this.i18n = newValue?newValue:navigator.localeuage || navigator.userLanguage;
+				this.i18n = newValue?newValue:navigator.language || navigator.userLanguage;
 				this.draw();
 			},
 			startChanged: function(oldValue, newValue) {
@@ -202,8 +202,8 @@
 				}
 				this.update();
 			},
-			prevMonth: function() {
-				// event.preventDefault();
+			prevMonth: function(event) {
+				if( event) { event.preventDefault(); }
 				this.day.add(-1,'M');
 				this.update();
 				this.fire('dateChange', this.day.valueOf());
@@ -215,7 +215,7 @@
 				this.fire('dateChange', this.day.valueOf());
 			},
 			today: function(event,detail,sender) {
-				event.preventDefault();
+				if( event) { event.preventDefault(); }
 				// if(this.day.format("YYYY-MM") === moment().format("YYYY-MM")) return;
 				this.day = moment();
 				this.update();
