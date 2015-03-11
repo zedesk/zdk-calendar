@@ -1,6 +1,18 @@
 
 # Changelog
 
+__v0.2.9__
+
+  - modify form2js to read value from an object with a name attrribute ( zdk-input-date )
+  - Fix CSS for Firefox
+  - Fix button prevMonth and today
+  - zdk-input-date : pass the i18n attribute to the embedded zdk-calendar
+  - change custom icon names to avoid overwriting
+  
+__v0.2.8__
+
+  - convert manual entry using the local format
+  
 __v0.2.7__
 
   - fix the value on blur
