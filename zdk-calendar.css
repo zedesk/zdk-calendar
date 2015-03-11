@@ -49,6 +49,10 @@ div.head div#date {
 	-ms-flex:7;
 }
 
+div.row {
+	align-items:inherit;
+}
+
 div.row div {
 	justify-content: center;
 	align-items: center;
