@@ -256,7 +256,7 @@
         if (callbackResult && callbackResult.name) {
             result = [callbackResult];
         }
-        else if (fieldName != '' && node.nodeName.match(/INPUT|TEXTAREA/i)) {
+        else if (fieldName != '' && !node.nodeName.match(/SELECT/i)) {
             fieldValue = getFieldValue(node, getDisabled);
             if (null === fieldValue) {
                 result = [];
