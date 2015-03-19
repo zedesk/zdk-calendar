@@ -117,6 +117,11 @@
 					cad.setAttribute("class", "collapse");
 				}
 			},
+			i18nChanged: function(oldValue, newValue) {
+				this.i18n = newValue?newValue:navigator.language || navigator.userLanguage;
+				moment.locale(this.i18n);
+				this.$.calendar.i18n = this.i18n;
+			},
             stopChanged: function(oldValue, newValue) {
                 if( this.stop === newValue) { return; }
                 this.$.calendar.stop = newValue;

@@ -1,6 +1,10 @@
 
 # Changelog
 
+__v0.2.12__
+
+  - Fix change of the i18n attribute
+  
 __v0.2.11__
 
   - Fix set start and stop date
