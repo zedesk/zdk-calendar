@@ -154,6 +154,7 @@
 			},
 			i18nChanged: function(oldValue, newValue) {
 				this.i18n = newValue?newValue:navigator.language || navigator.userLanguage;
+				this.day = (typeof this.date === "string")?moment(this.date):moment();
 				this.draw();
 			},
 			startChanged: function(oldValue, newValue) {
