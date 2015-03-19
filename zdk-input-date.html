@@ -2,7 +2,7 @@
 <link rel="import" href="../zdk-calendar/zdk-calendar.html">
 <link rel="import" href="../core-icons/core-icons.html">
 
-<polymer-element name="zdk-input-date" attributes="currentDateAuto autoCollapse inputDisabled i18n value name" onclick="">
+<polymer-element name="zdk-input-date" attributes="currentDateAuto autoCollapse inputDisabled i18n value name start stop staticpos" onclick="">
 	<template>
 		<link rel="stylesheet" href="zdk-input-date.css">
 		<div class="input">
@@ -13,12 +13,13 @@
 				<div class="outside"></div>
 				<div class="inner"></div>
 			</div>
-			<zdk-calendar id="calendar" i18n="{{i18n}}"></zdk-calendar>
+			<zdk-calendar id="calendar" i18n="{{i18n}}" start="{{start}}" stop="{{stop}}"></zdk-calendar>
 			</div>
 		<content></content>
 	</template>
 	<script>
 		Polymer('zdk-input-date', {
+			staticpos: false,
 			i18n: null,
 			currentDateAuto: false,
 			autoCollapse:true,
@@ -29,10 +30,12 @@
 				moment.locale(this.i18n);
 				this.$.calendar.i18n = this.i18n;
 				var pos = this.$.button.offsetLeft+15;
-				if( window.innerWidth < pos+125) {
-					this.$.divcalendar.style.right = 10 + "px";
-				} else {
-					this.$.divcalendar.style.left = (pos - 125) + "px";
+				if( !this.staticpos ) {
+					if( window.innerWidth < pos+125) {
+						this.$.divcalendar.style.right = 10 + "px";
+					} else {
+						this.$.divcalendar.style.left = (pos - 125) + "px";
+					}
 				}
 				// this.$.arrowup.style.left = (pos - 125)+"px"
 				this.$.arrowup.style.left = "105px";
@@ -114,6 +117,14 @@
 					cad.setAttribute("class", "collapse");
 				}
 			},
+            stopChanged: function(oldValue, newValue) {
+                if( this.stop === newValue) { return; }
+                this.$.calendar.stop = newValue;
+            },
+            startChanged: function(oldValue, newValue) {
+                if( this.start === newValue) { return; }
+                this.$.calendar.start = newValue;
+            },
 			fillInput: function(date) {
 				this.$.dateinput.value = date;
 				// this.toggleCollapse();
@@ -122,13 +133,19 @@
 				// var tmp = moment(this.value,moment.localeData().longDateFormat("L"));
 				var tmp = moment(this.value,"YYYY-MM-DD");
 				if( tmp.isValid() ) {
-					this.value = tmp.format("YYYY-MM-DD");
-					this.fillInput(tmp.format("L"));
+					if ( ( this.start && tmp.format("X") < this.start ) || ( this.stop && tmp.format("X") > this.stop ) ) {
+						this.value = moment(oldValue).format("YYYY-MM-DD");
+						this.fillInput(moment(oldValue).format("L"));
+					} else {
+						this.value = tmp.format("YYYY-MM-DD");
+						this.fillInput(tmp.format("L"));
+						this.fire('change');
+					}
 				} else {
 					this.value = null;
 					this.fillInput("");
+					this.fire('change');
 				}
-				this.fire('change');
 			},
 			clear: function() {
 				this.value = null;
