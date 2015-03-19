@@ -27,8 +27,19 @@
 				this.i18n = this.i18n?this.i18n:navigator.language || navigator.userLanguage;
 				moment.locale(this.i18n);
 				this.day = (typeof this.date === "string")?moment(this.date):moment();
-				if(this.start) { this.start = moment(this.start).format("X"); }
-				if(this.stop) { this.stop = moment(this.stop).format("X"); }
+				if(this.start) { 
+					if (moment(this.start).isValid() ) { 
+						this.start = moment(this.start).format("X"); 
+					} else {
+						this.start = null;
+					}
+				}
+				if(this.stop ) {
+					if (moment(this.stop).isValid() ) { 
+					 	this.stop = moment(this.stop).format("X"); }
+					} else {
+						this.stop = null
+					}
 				this.draw();
 			},
 			draw: function() {
@@ -146,18 +157,20 @@
 				this.draw();
 			},
 			startChanged: function(oldValue, newValue) {
-				if( !newValue.match(/\d{4}-\d{2}-\d{2}/) && this.start === newValue) { return; }
 				if(newValue) {
-					this.start = moment(newValue).format("X");
+					if( newValue.match(/\d{4}-\d{2}-\d{2}/) ) { 
+						this.start = moment(newValue).format("X");
+					}
 				} else {
 					this.start = null;
 				}
 				this.update();
 			},
 			stopChanged: function(oldValue, newValue) {
-				if( !newValue.match(/\d{4}-\d{2}-\d{2}/) && this.stop === newValue) { return; }
 				if(newValue) {
-					this.stop = moment(newValue).format("X");
+					if( newValue.match(/\d{4}-\d{2}-\d{2}/) ) {
+						this.stop = moment(newValue).format("X");
+					}
 				} else {
 					this.stop = null;
 				}

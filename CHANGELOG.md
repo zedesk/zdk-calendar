@@ -1,6 +1,15 @@
 
 # Changelog
 
+__v0.2.11__
+
+  - Fix set start and stop date
+  
+__v0.2.10__
+
+  - adds start and stop attributes to zdk-input-date
+  - adds a staticpos attribute to prevent the left move of the embedded calendar of the zdk-input-date component
+  
 __v0.2.9__
 
   - modify form2js to read value from an object with a name attrribute ( zdk-input-date )
