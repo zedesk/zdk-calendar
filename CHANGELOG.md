@@ -1,6 +1,10 @@
 
 # Changelog
 
+__v0.2.13__
+
+  - Fix Placeholder when changing i18n attribute on zdk-input-date
+
 __v0.2.12__
 
   - Fix change of the i18n attribute
