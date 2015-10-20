@@ -112,6 +112,7 @@
 				if(cad.classList.contains("collapse")) {
 					this.style.zIndex = 1000;
 					cad.setAttribute("class", "dropdown");
+					this.$.calendar.update();
 				} else {
 					this.style.zIndex = null;
 					cad.setAttribute("class", "collapse");

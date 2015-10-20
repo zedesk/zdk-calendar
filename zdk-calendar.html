@@ -154,6 +154,7 @@
 			},
 			i18nChanged: function(oldValue, newValue) {
 				this.i18n = newValue?newValue:navigator.language || navigator.userLanguage;
+				moment.locale(this.i18n);
 				this.day = (typeof this.date === "string")?moment(this.date):moment();
 				this.draw();
 			},
@@ -185,7 +186,7 @@
 						this.day = moment(newValue);
 						break;
 					case "string":
-						this.day = moment(newValue,"L");
+						this.day = moment(newValue);
 						if(this.day.isValid() === false) {
 							this.day = moment(newValue);
 						}
